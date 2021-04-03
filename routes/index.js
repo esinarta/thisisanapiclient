@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/admin', (req, res, next) => {
   // process.env.API_URL = https://thisisanapiserver.herokuapp.com
-  fetch(process.env.API_URL + '/requests')
+  fetch(process.env.API_URL + 'api/v1/requests')
     .then(result => result.json())
     .then(json => {
       res.render('admin', { title: 'Admin Page', requests: json });
