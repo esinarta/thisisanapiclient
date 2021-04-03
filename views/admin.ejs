@@ -6,8 +6,19 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <% requests.forEach((req) => { %>
-      <p><%= req.path %> <%= req.method %> <%= req.count %> </p>
-    <% }); %>
+    <table>
+      <tr>
+        <th>Path</th>
+        <th>Method</th>
+        <th>Count</th>
+      </tr>
+      <% requests.forEach((req) => { %>
+        <tr>
+          <td><%= req.path %></td> 
+          <td><%= req.method %></td>
+          <td><%= req.count %></td>
+        </tr>
+      <% }); %>
+    </table>
   </body>
 </html>
