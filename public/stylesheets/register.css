@@ -1,0 +1,24 @@
+input {
+  margin-top: 1em;
+  margin-bottom: 3em;
+}
+
+input {
+  width: 100%;
+  padding: 1em 1em;
+  margin: 1em 0;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  align-self: center;
+  background-color: #1234a3;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 1em 2em;
+  margin: 2em 0;
+  text-decoration: none;
+  cursor: pointer;
+}

@@ -1,17 +1,8 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
-}
-
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
-th, td {
-  padding: 1em;
 }
