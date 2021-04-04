@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <form id='profileForm'>
+      <label for="name">Name</label>
+      <input type="text" placeholder="Name" name="name" value="<%= data.name %>" required>
+      <br>
+      <label for="username">Username</label>
+      <input type="text" placeholder="Username" name="username" value="<%= data.username %>" required>
+      <br>
+      <label for="password">Password</label>
+      <input type="password" placeholder="Enter New Password" name="password" required>
+      <br>
+      <button type="submit" id="saveBtn">Save Changes</button>
+      <button type="submit" id="deleteBtn">Delete Account</button>
+    </form>
+  </body>
+</html>
