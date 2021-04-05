@@ -10,22 +10,13 @@ input {
   box-sizing: border-box;
 }
 
-button {
-  width: 100%;
-  align-self: center;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  padding: 1em 2em;
-  text-decoration: none;
-  cursor: pointer;
-}
-
 #saveBtn {
+  width: 100%;
   background-color: #1ab359;
   margin: 2em 0;
 }
 
 #deleteBtn {
+  width: 100%;
   background-color: #c91f1f;
 }
