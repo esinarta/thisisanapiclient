@@ -10,7 +10,7 @@ input {
   box-sizing: border-box;
 }
 
-button {
+#registerBtn {
   width: 100%;
   background-color: #1234a3;
 }

@@ -10,7 +10,7 @@ input {
   box-sizing: border-box;
 }
 
-button {
+#loginBtn {
   width: 100%;
   background-color: #1ab359;
 }
