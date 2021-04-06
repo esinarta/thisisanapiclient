@@ -9,10 +9,10 @@
     <h1><%= title %></h1>
     <form id='profileForm'>
       <label for="name">Name</label>
-      <input type="text" placeholder="Name" name="name" value="<%= data.name %>" required>
+      <input type="text" placeholder="Name" name="name" required>
       <br>
       <label for="username">Username</label>
-      <input type="text" placeholder="Username" name="username" value="<%= data.username %>" required>
+      <input type="text" placeholder="Username" name="username" required>
       <br>
       <label for="password">Password</label>
       <input type="password" placeholder="Enter New Password" name="password" required>
@@ -20,5 +20,7 @@
       <button type="submit" id="saveBtn">Save Changes</button>
       <button type="submit" id="deleteBtn">Delete Account</button>
     </form>
+
+    <script src="javascripts/profile.js"></script>
   </body>
 </html>

@@ -25,12 +25,7 @@ router.get('/login', (req, res, next) => {
 });
 
 router.get('/profile', (req, res, next) => {
-  let id = 10;
-  fetch(process.env.API_URL + `/api/v1/users/${id}`)
-  .then(result => result.json())
-  .then(json => {
-    res.render('profile', { title: 'My Profile', data: json });
-  });
+  res.render('profile', { title: 'My Profile' });
 });
 
 
