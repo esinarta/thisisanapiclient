@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/profile.css' />
+    <%- include('partials/head') %>
+    <link rel="stylesheet" href="stylesheets/profile.css"/>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <form id='profileForm'>
-      <label for="name">Name</label>
-      <input type="text" placeholder="Name" name="name" required>
-      <br>
-      <label for="username">Username</label>
-      <input type="text" placeholder="Username" name="username" required>
-      <br>
-      <label for="password">Password</label>
-      <input type="password" placeholder="Enter New Password" name="password" required>
-      <br>
-      <button type="submit" id="saveBtn">Save Changes</button>
-      <button type="submit" id="deleteBtn">Delete Account</button>
-    </form>
+    <div id="profileContainer" class="container fill">
+      <h1><%= title %></h1>
+      <form id='profileForm'>
+        <label for="name">Name</label>
+        <input type="text" placeholder="Name" name="name" class="formInput" required>
+        <br>
+        <label for="username">Username</label>
+        <input type="text" placeholder="Username" name="username" class="formInput" required>
+        <br>
+        <label for="password">Password</label>
+        <input type="password" placeholder="Enter New Password" name="password" class="formInput" required>
+        <br>
+        <button type="submit" id="saveBtn" class="goodBtn">Save Changes</button>
+        <button type="submit" id="deleteBtn" class="badBtn">Delete Account</button>
+      </form>
+    </div>
 
     <script src="javascripts/profile.js"></script>
   </body>

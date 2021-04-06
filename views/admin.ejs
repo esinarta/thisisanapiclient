@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <%- include('partials/header') %>
     <link rel='stylesheet' href='/stylesheets/admin.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <table id="adminTable">
-      <tr>
-        <th>Path</th>
-        <th>Method</th>
-        <th>Count</th>
-      </tr>
-      <% requests.forEach((req) => { %>
+    <div id="adminContainer" class="container fill">
+      <h1><%= title %></h1>
+      <table id="adminTable">
         <tr>
-          <td><%= req.path %></td> 
-          <td><%= req.method %></td>
-          <td><%= req.count %></td>
+          <th>Path</th>
+          <th>Method</th>
+          <th>Count</th>
         </tr>
-      <% }); %>
-    </table>
+        <% requests.forEach((req) => { %>
+          <tr>
+            <td><%= req.path %></td> 
+            <td><%= req.method %></td>
+            <td><%= req.count %></td>
+          </tr>
+        <% }); %>
+      </table>
+    </div>
   </body>
 </html>

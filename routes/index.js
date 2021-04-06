@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'This is an API' });
+  res.render('home', { title: 'This is an API' });
 });
 
 router.get('/admin', (req, res, next) => {
