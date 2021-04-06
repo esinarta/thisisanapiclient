@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sendFormData(form, '/users')
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        setCurrentUser(data.id);
       });
 
   });

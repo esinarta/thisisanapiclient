@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.error) {
           alert(data.error);
         } else {
-          sessionStorage.setItem("userId", data.id);
+          setCurrentUser(data.id);
           window.location = "/profile";
         }
       }).catch(err => {
