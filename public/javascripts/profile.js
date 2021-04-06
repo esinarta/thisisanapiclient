@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = {
       name: formData.get('name'),
       username: formData.get('username'),
-      password: formData.get('password')
     };
 
     fetch('http://localhost:3000/api/v1/users/' + id, {
