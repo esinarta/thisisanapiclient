@@ -10,9 +10,14 @@ router.get('/', function(req, res, next) {
 router.get('/admin', (req, res, next) => {
   // process.env.API_URL = https://thisisanapiserver.herokuapp.com
   fetch(process.env.API_URL + '/api/v1/requests')
-    .then(result => result.json())
-    .then(json => {
-      res.render('admin', { title: 'Admin Page', requests: json });
+    .then(response => {
+      if (response.status !== 200) {
+        res.redirect('/');
+        return;
+      }
+      return response.json();
+    }).then(json => {
+      res.render('admin', { title: 'Admin Page', requests: json, userid: req.session.userid });
     });
 });
 
@@ -24,6 +29,9 @@ router.get('/register', (req, res, next) => {
 });
 
 router.post('/register', (req, res) => {
+  if (req.session.userid !== undefined) {
+    res.redirect('/profile');
+  }
   const user = {
     name: req.body.name,
     username: req.body.username,
@@ -37,15 +45,19 @@ router.post('/register', (req, res) => {
       'Content-Type': 'application/json'
     }
   })
-  .then(res => res.json())
-  .then(data => {
+  .then(response => {
+    if (response.status !== 201) {
+      res.redirect('/register');
+      return;
+    }
+    return response.json();
+  }).then(data => {
     req.session.userid = data.id;
     res.redirect('/');
-  }).catch(err => console.error(err));
+  }).catch(err => console.error("POST /register", err));
 });
 
 router.get('/login', (req, res, next) => {
-  console.log(req.session.userid);
   if (req.session.userid !== undefined) {
     res.redirect('/profile');
   }
@@ -65,11 +77,16 @@ router.post('/login', (req, res) => {
       'Content-Type': 'application/json'
     }
   })
-  .then(res => res.json())
-  .then(data => {
+  .then(response => {
+    if (response.status !== 201) {
+      res.redirect('/login');
+      return;
+    }
+    return response.json();
+  }).then(data => {
     req.session.userid = data.id;
     res.redirect('/profile');
-  }).catch(err => console.error(err));
+  }).catch(err => console.error("POST /login", err));
 });
 
 router.get('/logout', (req, res) => {
@@ -83,14 +100,26 @@ router.get('/logout', (req, res) => {
 
 router.get('/profile', (req, res, next) => {
   const userid = req.session.userid;
-  if (!userid) res.redirect('/login');
-
-  fetch(process.env.API_URL + '/api/v1/users/' + userid)
-  .then(res => res.json())
-  .then(data => {
-    const user = data;
-    res.render('profile', { title: 'My Profile', user, userid: req.session.userid});
-  });
+  if (userid === undefined) {
+    res.redirect('/login');
+    return;
+  } else {
+    fetch(process.env.API_URL + '/api/v1/users/' + userid)
+    .then(response => {
+      if (response.status !== 200) {
+        res.redirect('/login');
+        return;
+      }
+      return response.json();
+    }).then(data => {
+      if (data.error) {
+        res.redirect('/');
+        return;
+      }
+      const user = data;
+      res.render('profile', { title: 'My Profile', user, userid});
+    });
+  }
 });
 
 module.exports = router;
