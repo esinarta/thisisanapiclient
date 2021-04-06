@@ -1,4 +1,5 @@
 var express = require('express');
+const { default: fetch } = require('node-fetch');
 var router = express.Router();
 
 /* GET users listing. */

@@ -1,17 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const id = sessionStorage.getItem("userId");
-  const nameInput = document.querySelector('input[name="name"]');
-  const usernameInput = document.querySelector('input[name="username"]');
-  if (id) {
-    const url = 'http://localhost:3000/api/v1/users/' + id;
-    fetch(url).then(res => {
-      return res.json();
+  const form = document.querySelector('#profileForm');
+  const nameInput = form.querySelector('input[name="name"]');
+  const usernameInput = form.querySelector('input[name="username"]');
+  const id = form.querySelector('input[name="id"]').value;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    const user = {
+      name: formData.get('name'),
+      username: formData.get('username'),
+      password: formData.get('password')
+    };
+
+    fetch('http://localhost:3000/api/v1/users/' + id, {
+      method: 'PUT',
+      body: JSON.stringify(user),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.status !== 200) {
+        alert('Could not update: ' + response.error);
+        // Not successful
+        return;
+      }
+      return response.json();
     }).then(data => {
       nameInput.value = data.name;
       usernameInput.value = data.username;
-    });
-  } else {
-    console.log("/profile : No user id in session");
-    window.location = "/login";
-  }
+      // Successful
+    }).catch(err => console.error(err));
+  });
 });

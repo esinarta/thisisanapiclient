@@ -9,6 +9,7 @@
     <div id="profileContainer" class="container fill">
       <h1><%= title %></h1>
       <form id='profileForm'>
+        <input type="hidden" name="id" value="<%= userid %>" />
         <label for="name">Name</label>
         <input type="text" placeholder="Name" name="name" class="formInput" value="<%= user.name %>" required>
         <br>
@@ -23,6 +24,6 @@
       <a id="deleteBtn" class="badBtn" href="/logout">Log Out</a>
     </div>
 
-    <!-- <script src="javascripts/profile.js"></script> -->
+    <script src="javascripts/profile.js"></script>
   </body>
 </html>
