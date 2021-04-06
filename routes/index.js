@@ -72,6 +72,15 @@ router.post('/login', (req, res) => {
   }).catch(err => console.error(err));
 });
 
+router.get('/logout', (req, res) => {
+  if (req.session.userid) {
+    req.session.userid = undefined;
+    res.redirect('/');
+  } else {
+    res.redirect('/login');
+  }
+});
+
 router.get('/profile', (req, res, next) => {
   const userid = req.session.userid;
   if (!userid) res.redirect('/login');
