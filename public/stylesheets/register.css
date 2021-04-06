@@ -1,3 +1,7 @@
 #registerBtn {
   width: 100%;
 }
+
+#registrationForm input {
+  margin-bottom: 1em;
+}

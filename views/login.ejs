@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%- include('partials/head') %>
+    <%- include('partials/header') %>
     <link rel='stylesheet' href='/stylesheets/login.css' />
   </head>
   <body>
+    <%- include('partials/navbar') %>
     <div id="loginContainer" class="container fill">
       <h1><%= title %></h1>
       <form id='loginForm'>
@@ -21,6 +22,7 @@
       <button class="backBtn" onclick="window.location='/'">Back</button>
     </div>
 
+    <%- include('partials/scripts') %>
     <script src="javascripts/login.js"></script>
   </body>
 </html>
