@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('home', { title: 'This is an API' });
+  res.render('home', { title: 'This is an API', userid: req.session.userid });
 });
 
 router.get('/admin', (req, res, next) => {
@@ -17,17 +17,71 @@ router.get('/admin', (req, res, next) => {
 });
 
 router.get('/register', (req, res, next) => {
-  res.render('register', { title: 'Registration Page' });
+  if (req.session.userid) {
+    res.redirect('/profile');
+  }
+  res.render('register', { title: 'Registration Page', userid: req.session.userid });
+});
+
+router.post('/register', (req, res) => {
+  const user = {
+    name: req.body.name,
+    username: req.body.username,
+    password: req.body.password
+  }
+
+  fetch(process.env.API_URL + '/api/v1/users', {
+    method: 'POST',
+    body: JSON.stringify(user),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    req.session.userid = data.id;
+    res.redirect('/');
+  }).catch(err => console.error(err));
 });
 
 router.get('/login', (req, res, next) => {
-  res.render('login', { title: 'Login Page' });
+  console.log(req.session.userid);
+  if (req.session.userid !== undefined) {
+    res.redirect('/profile');
+  }
+  res.render('login', { title: 'Login Page', userid: req.session.userid });
+});
+
+router.post('/login', (req, res) => {
+  const user = {
+    username: req.body.username,
+    password: req.body.password
+  };
+
+  fetch(process.env.API_URL + '/api/v1/auth/users', {
+    method: 'POST',
+    body: JSON.stringify(user),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    req.session.userid = data.id;
+    res.redirect('/profile');
+  }).catch(err => console.error(err));
 });
 
 router.get('/profile', (req, res, next) => {
-  res.render('profile', { title: 'My Profile' });
+  const userid = req.session.userid;
+  if (!userid) res.redirect('/login');
+
+  fetch(process.env.API_URL + '/api/v1/users/' + userid)
+  .then(res => res.json())
+  .then(data => {
+    const user = data;
+    res.render('profile', { title: 'My Profile', user, userid: req.session.userid});
+  });
 });
-
-
 
 module.exports = router;

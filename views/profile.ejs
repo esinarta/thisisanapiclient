@@ -10,10 +10,10 @@
       <h1><%= title %></h1>
       <form id='profileForm'>
         <label for="name">Name</label>
-        <input type="text" placeholder="Name" name="name" class="formInput" required>
+        <input type="text" placeholder="Name" name="name" class="formInput" value="<%= user.name %>" required>
         <br>
         <label for="username">Username</label>
-        <input type="text" placeholder="Username" name="username" class="formInput" required>
+        <input type="text" placeholder="Username" name="username" class="formInput" value="<%= user.username %>" required>
         <br>
         <label for="password">Password</label>
         <input type="password" placeholder="Enter New Password" name="password" class="formInput" required>
@@ -23,6 +23,6 @@
       </form>
     </div>
 
-    <script src="javascripts/profile.js"></script>
+    <!-- <script src="javascripts/profile.js"></script> -->
   </body>
 </html>

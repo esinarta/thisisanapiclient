@@ -4,20 +4,22 @@
   </div>
   <div id="navbar-right" class="navbar-section">
     <ul id="nav-group">
-      <li class="nav-item" id="nav-register">
-        <a href="/register" class="nav-link backBtn">
-          <p>
-            Register
-          </p>
-        </a>
-      </li>
-      <li class="nav-item" id="nav-login">
-        <a href="/login" class="nav-link backBtn">
-          <p>
-            Log In
-          </p>
-        </a>
-      </li>
+      <% if (userid === undefined) { %>
+        <li class="nav-item" id="nav-register">
+          <a href="/register" class="nav-link backBtn">
+            <p>
+              Register
+            </p>
+          </a>
+        </li>
+        <li class="nav-item" id="nav-login">
+          <a href="/login" class="nav-link backBtn">
+            <p>
+              Log In
+            </p>
+          </a>
+        </li>
+      <% } %>
       <li class="nav-item" id="nav-admin">
         <a href="/admin" class="nav-link backBtn">
           <p>

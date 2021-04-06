@@ -8,7 +8,7 @@
     <%- include('partials/navbar') %>
     <div id="register-container" class="container fill">
       <h1><%= title %></h1>
-      <form id='registrationForm'>
+      <form id='registrationForm' action='/register' method='POST'>
         <label for="name">Name</label>
         <br>
         <input type="text" placeholder="Name" name="name" class="formInput" required>
@@ -26,6 +26,5 @@
       <button class="backBtn" onclick="window.location='/'">Back</button>
     </div>
     <%- include('partials/scripts') %>
-    <script src="javascripts/register.js"></script>
   </body>
 </html>
