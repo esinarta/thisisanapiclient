@@ -15,11 +15,14 @@
         <br>
         <label for="endpointData">Data</label>
         <br>
-        <textarea type="text" name="endpointData" class="formInput" rows="10" required></textarea>
+        <textarea id="jsonTextArea" type="text" name="endpointData" rows="10" required></textarea>
+        <p id="formatLabel"></p>
+        <button id="formatBtn" type="button" onclick="formatJSON()">Format JSON</button>
         <br>
         <button type="submit" id="createBtn" class="goodBtn">Create</button>
       </form>
     </div>
     <%- include('partials/scripts') %>
+    <script src="javascripts/create.js"></script>
   </body>
 </html>

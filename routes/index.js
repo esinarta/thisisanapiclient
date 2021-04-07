@@ -85,7 +85,7 @@ router.post('/login', (req, res) => {
     return response.json();
   }).then(data => {
     req.session.userid = data.id;
-    res.redirect('/profile');
+    res.redirect('/create');
   }).catch(err => console.error("POST /login", err));
 });
 
