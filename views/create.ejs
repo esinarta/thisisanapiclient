@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('partials/header') %>
+    <link rel='stylesheet' href='/stylesheets/create.css' />
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+    <div id="create-container" class="container fill">
+      <h1><%= title %></h1>
+      <form id='createForm' action='/create' method='POST'>
+        <label for="endpointName">Name</label>
+        <br>
+        <input type="text" name="endpointName" class="formInput" required>
+        <br>
+        <label for="endpointData">Data</label>
+        <br>
+        <textarea type="text" name="endpointData" class="formInput" rows="10" required></textarea>
+        <br>
+        <button type="submit" id="createBtn" class="goodBtn">Create</button>
+      </form>
+    </div>
+    <%- include('partials/scripts') %>
+  </body>
+</html>

@@ -122,4 +122,14 @@ router.get('/profile', (req, res, next) => {
   }
 });
 
+router.get('/create', (req, res, next) => {
+  const userid = req.session.userid;
+  if (userid === undefined) {
+    res.redirect('/login');
+    return;
+  }
+
+  res.render('create', { title: 'Create New Endpoint', userid: req.session.userid });
+});
+
 module.exports = router;
