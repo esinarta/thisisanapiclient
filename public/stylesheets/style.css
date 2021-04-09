@@ -52,3 +52,7 @@ button {
 .text-center {
   text-align: center;
 }
+
+.errorLabel {
+  color: rgb(192, 45, 45);
+}

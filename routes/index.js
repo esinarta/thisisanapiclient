@@ -25,7 +25,7 @@ router.get('/register', (req, res, next) => {
   if (req.session.userid) {
     res.redirect('/profile');
   }
-  res.render('register', { title: 'Registration Page', userid: req.session.userid });
+  res.render('register', { title: 'Registration Page', userid: req.session.userid, errorMsg: "" });
 });
 
 router.post('/register', (req, res) => {
@@ -47,7 +47,7 @@ router.post('/register', (req, res) => {
   })
   .then(response => {
     if (response.status !== 201) {
-      res.redirect('/register');
+      res.render('register', { title: 'Registration Page', userid: req.session.userid, errorMsg: "Username already exists." });
       return;
     }
     return response.json();
@@ -61,7 +61,7 @@ router.get('/login', (req, res, next) => {
   if (req.session.userid !== undefined) {
     res.redirect('/profile');
   }
-  res.render('login', { title: 'Login Page', userid: req.session.userid });
+  res.render('login', { title: 'Login Page', userid: req.session.userid, errorMsg: "" });
 });
 
 router.post('/login', (req, res) => {
@@ -79,7 +79,7 @@ router.post('/login', (req, res) => {
   })
   .then(response => {
     if (response.status !== 201) {
-      res.redirect('/login');
+      res.render('login', { title: 'Login Page', userid: req.session.userid, errorMsg: "Username and/or password incorrect." });
       return;
     }
     return response.json();
