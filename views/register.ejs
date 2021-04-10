@@ -9,13 +9,13 @@
     <div id="register-container" class="container fill">
       <h1><%= title %></h1>
       <form id='registrationForm' action='/register' method='POST'>
-        <label for="name">Name</label>
+        <label for="name">Name (Letters and Numbers Only)</label>
         <br>
-        <input type="text" placeholder="Name" name="name" class="formInput" required>
+        <input type="text" placeholder="Name" name="name" class="formInput" pattern="[A-Za-z0-9]+" required>
         <br>
-        <label for="username">Username</label>
+        <label for="username">Username (Letters and Numbers Only)</label>
         <br>
-        <input type="text" placeholder="Username" name="username" class="formInput" required>
+        <input type="text" placeholder="Username" name="username" class="formInput" pattern="[A-Za-z0-9]+" required>
         <br>
         <label for="password">Password</label>
         <br>

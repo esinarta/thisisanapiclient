@@ -9,9 +9,9 @@
     <div id="create-container" class="container fill">
       <h1><%= title %></h1>
       <form id='createForm' action='/create' method='POST'>
-        <label for="endpointName">Name</label>
+        <label for="endpointName">Name (Letters and Numbers Only)</label>
         <br>
-        <input type="text" name="endpointName" class="formInput" required>
+        <input type="text" name="endpointName" class="formInput" pattern="[A-Za-z0-9]+" required>
         <br>
         <label for="endpointData">Data</label>
         <br>
