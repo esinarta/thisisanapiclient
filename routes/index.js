@@ -132,4 +132,9 @@ router.get('/create', (req, res, next) => {
   res.render('create', { title: 'Create New Endpoint', userid: req.session.userid });
 });
 
+router.get('/edit', (req, res, next) => {
+  const userid = req.session.userid;
+  res.render('edit', { title: 'Edit Endpoint', userid});
+});
+
 module.exports = router;

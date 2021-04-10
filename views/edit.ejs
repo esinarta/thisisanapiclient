@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('partials/header') %>
+    <link rel='stylesheet' href='/stylesheets/edit.css' />
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+    <div id="edit-container" class="container fill">
+      <h1><%= title %></h1>
+      <form id='editForm' action='/edit' method='POST'>
+        <label for="endpointName">Name</label>
+        <br>
+        <input type="text" name="endpointName" class="formInput" required>
+        <br>
+        <label for="endpointData">Data</label>
+        <br>
+        <textarea id="jsonTextArea" type="text" name="endpointData" rows="10" required></textarea>
+        <p class="errorLabel" id="formatLabel"></p>
+        <button id="formatBtn" type="button" onclick="formatJSON()">Format JSON</button>
+        <br>
+        <button type="submit" id="saveBtn" class="goodBtn">Save</button>
+        <button type="submit" id="deleteBtn" class="badBtn">Delete</button>
+      </form>
+    </div>
+    <%- include('partials/scripts') %>
+    <script src="javascripts/edit.js"></script>
+  </body>
+</html>

@@ -56,3 +56,20 @@ button {
 .errorLabel {
   color: rgb(192, 45, 45);
 }
+
+#jsonTextArea {
+  width: 100%;
+  padding: 1em 1em;
+  margin: 1em 0 1em;
+  box-sizing: border-box;
+}
+
+#formatBtn {
+  margin: 0 auto;
+  display: block;
+  background-color: rgb(34, 34, 156);
+}
+
+#formatLabel {
+  text-align: center;
+}
