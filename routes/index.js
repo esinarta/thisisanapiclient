@@ -1,13 +1,54 @@
 var express = require('express');
 var router = express.Router();
 const fetch = require('node-fetch');
+const jwt = require('jsonwebtoken');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('home', { title: 'This is an API', userid: req.session.userid });
 });
 
+router.get('/admin/login', (req, res) => {
+  if (req.session.admin_token !== undefined) {
+    res.redirect('/admin');
+  }
+  res.render('adminlogin', { title: 'Admin Login', errorMsg: "", userid: req.session.userid });
+});
+
+router.post('/admin/login', (req, res) => {
+  if (req.session.admin_token !== undefined) {
+    res.redirect('/admin');
+    return;
+  }
+  const admin = {
+    username: req.body.username,
+    password: req.body.password
+  };
+
+  fetch(process.env.API_URL + '/api/v1/auth/admins', {
+    method: 'POST',
+    body: JSON.stringify(admin),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.status !== 201) {
+      res.redirect('/admin/login');
+      return;
+    }
+    return response.json();
+  }).then(data => {
+    const token = jwt.decode(data.jwt);
+    req.session.admin_token = data.jwt;
+    res.redirect('/admin');
+  }).catch(err => console.error("POST /admin/login", err));
+});
+
 router.get('/admin', (req, res, next) => {
+  if (req.session.admin_token === undefined) {
+    res.redirect('/admin/login');
+  }
   // process.env.API_URL = https://thisisanapiserver.herokuapp.com
   fetch(process.env.API_URL + '/api/v1/requests')
     .then(response => {
@@ -52,7 +93,9 @@ router.post('/register', (req, res) => {
     }
     return response.json();
   }).then(data => {
-    req.session.userid = data.id;
+    const token = jwt.decode(data.jwt);
+    req.session.userid = token.id;
+    req.session.token = data.jwt;
     res.redirect('/');
   }).catch(err => console.error("POST /register", err));
 });
@@ -84,7 +127,9 @@ router.post('/login', (req, res) => {
     }
     return response.json();
   }).then(data => {
-    req.session.userid = data.id;
+    const token = jwt.decode(data.jwt);
+    req.session.userid = token.id;
+    req.session.token = data.jwt;
     res.redirect('/endpoints');
   }).catch(err => console.error("POST /login", err));
 });
@@ -92,6 +137,7 @@ router.post('/login', (req, res) => {
 router.get('/logout', (req, res) => {
   if (req.session.userid) {
     req.session.userid = undefined;
+    req.session.token = undefined;
     res.redirect('/');
   } else {
     res.redirect('/login');
@@ -104,7 +150,11 @@ router.get('/profile', (req, res, next) => {
     res.redirect('/login');
     return;
   } else {
-    fetch(process.env.API_URL + '/api/v1/users/' + userid)
+    fetch(process.env.API_URL + '/api/v1/users/' + userid, {
+      headers: {
+        'Authorization': 'Bearer ' + req.session.token
+      }
+    })
     .then(response => {
       if (response.status !== 200) {
         res.redirect('/login');

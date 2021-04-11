@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('partials/header') %>
+    <link rel='stylesheet' href='/stylesheets/login.css' />
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+    <div id="loginContainer" class="container fill">
+      <h1><%= title %></h1>
+      <form id='loginForm' action='/admin/login' method='POST'>
+        <label for="username">Username</label>
+        <br>
+        <input type="text" placeholder="Username" class="formInput" name="username" required>
+        <br>
+        <label for="password">Password</label>
+        <br>
+        <input type="password" placeholder="Password" class="formInput" name="password" required>
+        <p class="errorLabel"><%= errorMsg %></p>
+        <button type="submit" id="loginBtn" class="goodBtn">Login</button>
+      </form>
+      <button class="backBtn" onclick="window.location='/'">Back</button>
+    </div>
+
+    <%- include('partials/scripts') %>
+  </body>
+</html>

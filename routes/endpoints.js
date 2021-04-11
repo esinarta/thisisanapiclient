@@ -10,15 +10,22 @@ router.get('/', (req, res) => {
     return;
   }
 
-  fetch(process.env.API_URL + '/api/v1/users/' + userid + '/endpoints')
+  fetch(process.env.API_URL + '/api/v1/users/' + userid + '/endpoints',
+  { 
+    headers: {
+      'Authorization': 'Bearer ' + req.session.token
+    }
+  })
   .then(response => {
     return response.json();
   }).then(json => {
+    let endpoints = json;
+    if (json.message) endpoints = [];
     res.render(
       'endpoints_index',
       {
         title: 'Endpoints',
-        endpoints: json,
+        endpoints,
         userid: req.session.userid
       }
     );
@@ -43,7 +50,6 @@ router.get('/new', (req, res) => {
 });
 
 router.get('/:name/edit', (req, res) => {
-  req.session.userid = 26;
   const userid = req.session.userid;
   if (userid === undefined) {
     res.redirect('/login');
@@ -52,7 +58,11 @@ router.get('/:name/edit', (req, res) => {
 
   const path = `/api/v1/users/${req.session.userid}/endpoints/${req.params.name}`;
 
-  fetch(process.env.API_URL + path).then(response => {
+  fetch(process.env.API_URL + path, {
+    headers: {
+      'Authorization': 'Bearer ' + req.session.token
+    }
+  }).then(response => {
     return response.json();
   }).then(data => {
     res.render(
@@ -83,7 +93,6 @@ router.post('/edit', (req, res) => {
     name: req.body.endpointName,
     data: req.body.endpointData
   }
-  console.log(endpoint);
 
   const path = `/api/v1/users/${req.session.userid}/endpoints/${originalName}`;
 
@@ -91,7 +100,8 @@ router.post('/edit', (req, res) => {
     method: 'PUT',
     body: JSON.stringify(endpoint),
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + req.session.token
     }
   }).then(response => {
     return response.json();
@@ -116,6 +126,9 @@ router.post('/:name/delete', (req, res) => {
 
   fetch(process.env.API_URL + path, {
     method: 'DELETE',
+    headers: {
+      'Authorization': 'Bearer ' + req.session.token
+    }
   }).then(response => {
     return response.json();
   }).then(data => {
@@ -146,7 +159,8 @@ router.post('/', (req, res) => {
     method: 'POST',
     body: JSON.stringify(endpoint),
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + req.session.token
     }
   }).then(response => {
     return response.json();
