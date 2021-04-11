@@ -122,38 +122,4 @@ router.get('/profile', (req, res, next) => {
   }
 });
 
-router.get('/endpoints', (req, res, next) => {
-  const userid = req.session.userid;
-  if (userid === undefined) {
-    res.redirect('/login');
-    return;
-  }
-
-  fetch(process.env.API_URL + '/api/v1/users/' + userid + '/endpoints')
-  .then(response => {
-    return response.json();
-  }).then(json => {
-    res.render('endpoints', { title: 'Endpoints', endpoints: json, userid: req.session.userid });
-  });
-});
-
-router.get('/create', (req, res, next) => {
-  const userid = req.session.userid;
-  if (userid === undefined) {
-    res.redirect('/login');
-    return;
-  }
-
-  res.render('create', { title: 'Create New Endpoint', userid: req.session.userid });
-});
-
-router.get('/edit', (req, res, next) => {
-  const userid = req.session.userid;
-  if (userid === undefined) {
-    res.redirect('/login');
-    return;
-  }
-  res.render('edit', { title: 'Edit Endpoint', userid});
-});
-
 module.exports = router;

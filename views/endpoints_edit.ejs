@@ -7,23 +7,27 @@
   <body>
     <%- include('partials/navbar') %>
     <div id="edit-container" class="container fill">
-      <h1><%= title %></h1>
-      <form id='editForm' action='/edit' method='POST'>
+      <h1><%= title %> "<%= name %>"</h1>
+      <form id='editForm' action='/endpoints/edit' method='POST'>
+        <input type="hidden" value="<%= name %>" name="originalName"/>
         <label for="endpointName">Name (Letters and Numbers Only)</label>
         <br>
-        <input type="text" name="endpointName" class="formInput" pattern="[A-Za-z0-9]+" required>
+        <input type="text" name="endpointName" class="formInput" pattern="[A-Za-z0-9]+" value="<%= name %>"required>
         <br>
         <label for="endpointData">Data</label>
         <br>
-        <textarea id="jsonTextArea" type="text" name="endpointData" rows="10" required></textarea>
+        <textarea id="jsonTextArea" type="text" name="endpointData" rows="10" required><%= data %></textarea>
         <p class="errorLabel" id="formatLabel"></p>
-        <button id="formatBtn" type="button" onclick="formatJSON()">Format JSON</button>
+        <button id="formatBtn" type="button">Format JSON</button>
         <br>
         <button type="submit" id="saveBtn" class="goodBtn">Save</button>
+      </form>
+      <form id="deleteForm" action='<%= "/endpoints/"+name+"/delete" %>' method='POST'>
         <button type="submit" id="deleteBtn" class="badBtn">Delete</button>
       </form>
       <button class="backBtn" onclick="window.location='/endpoints'">Back</button>
     </div>
     <%- include('partials/scripts') %>
+    <script src="/javascripts/newEndpointForm.js"></script>
   </body>
 </html>

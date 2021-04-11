@@ -8,11 +8,11 @@
     <%- include('partials/navbar') %>
     <div id="endpoints-container" class="container fill">
       <h1><%= title %></h1>
-      <button id="createBtn" class="goodBtn" onclick="window.location='/create'">Create New Endpoint</button>
+      <button id="createBtn" class="goodBtn" onclick="window.location='/endpoints/new'">Create New Endpoint</button>
       <h2>Edit Endpoints</h2>
       <ul id="endpoints-list">
         <% endpoints.forEach((req) => { %>
-          <a href="/edit"><li><%= req.name %></li></a>
+          <a href="/endpoints/<%= req.name %>/edit"><li><%= req.name %></li></a>
         <% }); %>
       </ul>
     </div>
