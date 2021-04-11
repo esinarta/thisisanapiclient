@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('home', { title: 'This is an API', userid: req.session.userid });
+  const logged_in = req.session.userid !== undefined;
+  res.render('home', { title: 'This is an API', userid: req.session.userid, logged_in });
 });
 
 router.get('/admin/login', (req, res) => {

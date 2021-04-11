@@ -9,10 +9,12 @@
     <div id="home-container" class="container fill">
       <h1 class="title text-center"><%= title %></h1>
       <p class="description text-center">This is an API is an app that allows developers to create and expose API endpoints to help streamline the development process.</p>
-      <div class='text-center'>
-        <button id="registerBtn" class="backBtn" onclick="window.location='/register'">Register</button>
-        <button id="loginBtn" class="goodBtn" onclick="window.location='/login'">Login</button>
-      </div>
+      <% if (!logged_in) { %>
+        <div class='text-center'>
+          <button id="registerBtn" class="backBtn" onclick="window.location='/register'">Register</button>
+          <button id="loginBtn" class="goodBtn" onclick="window.location='/login'">Login</button>
+        </div>
+      <% } %>
     </div>
     <%- include('partials/scripts') %>
   </body>
